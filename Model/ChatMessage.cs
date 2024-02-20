@@ -51,9 +51,6 @@ public interface IMessage
     [ID]
     public Guid Id { get; set; }
 
-    [GraphQLIgnore]
-    public Guid ChatId { get; set; }
-
     public ChatMessageRole Role { get; set; }
 
     public DateTime SentAt { get; set; }
