@@ -16,8 +16,7 @@ public sealed class Query
         CancellationToken ct)
         => service.GetChatByIdAsync(id, ct);
 
-    [NodeResolver]
-    public async Task<ChatMessage> GetChatMessageById(
+    public async Task<IMessage> GetChatMessageById(
         [Service] IChatService service,
         [ID] Guid id,
         CancellationToken ct)
