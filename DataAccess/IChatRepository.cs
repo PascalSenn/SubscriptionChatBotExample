@@ -26,4 +26,6 @@ public interface IChatRepository
     ValueTask<IReadOnlyList<ChatMessage>> GetMessagesByChatIdAsync(
         Guid chatId,
         CancellationToken ct);
+    
+    ValueTask<IReadOnlyList<Chat>> GetChatsAsync(CancellationToken ct);
 }

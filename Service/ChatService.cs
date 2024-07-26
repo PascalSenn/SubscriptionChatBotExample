@@ -46,6 +46,9 @@ public sealed class ChatService : IChatService
         }
 
         var chat = await _repository.CreateChatAsync(session.UserId, ct);
+        const string initialMessage = "Hi there! How can i help?";
+        await _repository
+            .CreateMessageAsync(chat.Id, initialMessage, ChatMessageRole.Assistant, ct);
 
         return chat;
     }
@@ -132,6 +135,14 @@ public sealed class ChatService : IChatService
         return message;
     }
 
+    /// <inheritdoc />
+    public async Task<IReadOnlyList<ChatMessage>> GetMessagesByChatIdAsync(
+        Guid chatId,
+        CancellationToken ct)
+    {
+        return await _repository.GetMessagesByChatIdAsync(chatId, ct);
+    }
+
     public async Task<ChatMessage> SendMessageAsync(
         Guid chatId,
         string content,
@@ -174,6 +185,10 @@ public sealed class ChatService : IChatService
 
         return message;
     }
+
+    /// <inheritdoc />
+    public async Task<IReadOnlyList<Chat>> GetChatsAsync(CancellationToken ct)
+        => await _repository.GetChatsAsync(ct);
 
     /// <inheritdoc />
     public async Task<Chat> CloseChatAsync(Guid chatId, CancellationToken ct)

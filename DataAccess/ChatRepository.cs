@@ -51,4 +51,9 @@ public class ChatRepository
         => new(_messages.Values
             .Where(x => x.ChatId == chatId)
             .ToList());
+
+    public ValueTask<IReadOnlyList<Chat>> GetChatsAsync(CancellationToken ct)
+    {
+        return new(_chats.Values.ToList());
+    }
 }

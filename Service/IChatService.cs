@@ -15,7 +15,11 @@ public interface IChatService
 
     Task<ChatMessage?> GetMessageByIdAsync(Guid messageId, CancellationToken ct);
 
+    Task<IReadOnlyList<ChatMessage>> GetMessagesByChatIdAsync(Guid chatId, CancellationToken ct);
+
     IAsyncEnumerable<IChatMessageEvent> SubscribeToChatMessagesAsync(Guid chatId);
+
+    Task<IReadOnlyList<Chat>> GetChatsAsync(CancellationToken ct);
 
     Task<Chat> CloseChatAsync(Guid chatId, CancellationToken ct);
 }
