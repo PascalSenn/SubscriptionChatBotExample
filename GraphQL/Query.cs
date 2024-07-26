@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using HotChocolate;
@@ -12,7 +13,7 @@ public sealed class Query
     [NodeResolver]
     public Task<Chat?> GetChatById(
         [Service] IChatService service,
-        [ID] Guid id,
+        Guid id,
         CancellationToken ct)
         => service.GetChatByIdAsync(id, ct);
 
@@ -29,4 +30,9 @@ public sealed class Query
 
         return message;
     }
+
+    public async Task<IReadOnlyList<Chat>> GetChatMessagesByChatId(
+        [Service] IChatService service,
+        CancellationToken ct)
+        => await service.GetChatsAsync(ct);
 }
